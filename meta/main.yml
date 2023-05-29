@@ -1,0 +1,12 @@
+---
+dependencies: []
+galaxy_info:
+  role_name: ansible_role_ldapauth
+  author: jhujasonw
+  description: A simple role to configure ldap authentication.
+  license: "license (Apache)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - all

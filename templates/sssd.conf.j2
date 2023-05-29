@@ -1,0 +1,40 @@
+[domain/default]
+#used for matching the ENTIRE username to the input for user@domain
+#default_domain_suffix = default
+ldap_tls_reqcert = never
+use_fully_qualified_names = False
+cache_credentials = False
+ldap_search_base = {{ ldap_base }}
+id_provider = ldap
+auth_provider = ldap
+chpass_provider = ldap
+ldap_uri = {{ ldap_uri }}
+ldap_id_use_start_tls = False
+ldap_tls_cacertdir = /etc/openldap/cacerts
+
+
+[sssd]
+ldap_tls_reqcert = never
+services = nss, pam
+config_file_version = 2
+domains = default
+#used for matching the ENTIRE username to the input for user@domain
+re_expression = ((?P<name>.*)$)
+#default_domain_suffix = default
+
+[nss]
+entry_negative_timeout = 1
+homedir_substring = /home
+
+[pam]
+
+[sudo]
+
+[autofs]
+
+[ssh]
+
+[pac]
+
+[ifp]
+

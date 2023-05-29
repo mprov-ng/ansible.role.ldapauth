@@ -1,0 +1,44 @@
+---
+- name: "Setup Ldap"
+  block:
+    - name: "Yum Install Prerequisite Software"
+      yum: pkg={{item}} state=installed
+      with_items:
+        - nss-pam-ldapd
+        - sssd
+        - openldap-clients
+        
+    - name: "Update authconfig"
+      command: authconfig --enableldap --enableldapauth {{ ldap_tls }} --ldapserver="{{ ldap_uri }}" --ldapbasedn="{{ ldap_base }}" --update
+
+    - name: "Update ldap.conf file"
+      template: src=ldap.conf.j2 dest=/etc/openldap/ldap.conf
+        owner=root
+        group=root
+        mode=0644
+
+    - name: "Update nsswitch File"
+      template: src=nsswitch.conf.j2 dest=/etc/nsswitch.conf
+        owner=root
+        group=root
+        mode=0644
+
+    - name: "Update sssd.conf File"
+      template: src=sssd.conf.j2 dest=/etc/sssd/sssd.conf
+        owner=root
+        group=root
+        mode=0600
+
+    - name: restart sssd
+      service: 
+        name: sssd 
+        state: restarted
+      when: ansible_connection != "chroot"
+
+    - name: "Verify Function"
+      shell: ldapsearch -x 
+      register: ldapsearch_return
+      failed_when: ( ldapsearch_return.rc != 0 ) and ( ldapsearch_return.rc != 32 )
+
+  when: ldap_base is defined
+

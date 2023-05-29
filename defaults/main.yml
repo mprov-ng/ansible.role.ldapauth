@@ -1,0 +1,10 @@
+---
+# ldap_base: the base dn of the ldap client.
+ldap_base: "dc=cluster,dc=local"
+
+# ldap_uri: the uri to use to connect to he ldap server
+ldap_uri: "ldaps://ldap/"
+
+# ldap_tls: set to "--enableldaptls" to enable tls communications
+# comment out to disable.
+ldap_tls: "--enableldaptls"
