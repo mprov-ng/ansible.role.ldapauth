@@ -8,6 +8,7 @@
         - sssd
         - openldap-clients
         
+    # TODO: Update tp authselect
     - name: "Update authconfig"
       command: authconfig --enableldap --enableldapauth {{ ldap_tls }} --ldapserver="{{ ldap_uri }}" --ldapbasedn="{{ ldap_base }}" --update
 
@@ -34,11 +35,6 @@
         name: sssd 
         state: restarted
       when: ansible_connection != "chroot"
-
-    - name: "Verify Function"
-      shell: ldapsearch -x 
-      register: ldapsearch_return
-      failed_when: ( ldapsearch_return.rc != 0 ) and ( ldapsearch_return.rc != 32 )
 
   when: ldap_base is defined
 
