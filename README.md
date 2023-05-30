@@ -25,7 +25,7 @@ Example Playbook
 - hosts: all
   remote_user: root
   roles:
-    - ansible-slapd
+    - ansible.role.ldapauth
 ```
 
 License
