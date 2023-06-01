@@ -7,10 +7,12 @@
         - nss-pam-ldapd
         - sssd
         - openldap-clients
+        - authselect
         
     # TODO: Update tp authselect
-    - name: "Update authconfig"
-      command: authconfig --enableldap --enableldapauth {{ ldap_tls }} --ldapserver="{{ ldap_uri }}" --ldapbasedn="{{ ldap_base }}" --update
+    - name: "Update authselect"
+      #command: authconfig --enableldap --enableldapauth {{ ldap_tls }} --ldapserver="{{ ldap_uri }}" --ldapbasedn="{{ ldap_base }}" --update
+      command: authselect select sssd
 
     - name: "Update ldap.conf file"
       template: src=ldap.conf.j2 dest=/etc/openldap/ldap.conf
@@ -18,11 +20,11 @@
         group=root
         mode=0644
 
-    - name: "Update nsswitch File"
-      template: src=nsswitch.conf.j2 dest=/etc/nsswitch.conf
-        owner=root
-        group=root
-        mode=0644
+    # - name: "Update nsswitch File"
+    #   template: src=nsswitch.conf.j2 dest=/etc/nsswitch.conf
+    #     owner=root
+    #     group=root
+    #     mode=0644
 
     - name: "Update sssd.conf File"
       template: src=sssd.conf.j2 dest=/etc/sssd/sssd.conf
