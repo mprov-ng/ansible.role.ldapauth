@@ -12,7 +12,7 @@
     # TODO: Update tp authselect
     - name: "Update authselect"
       #command: authconfig --enableldap --enableldapauth {{ ldap_tls }} --ldapserver="{{ ldap_uri }}" --ldapbasedn="{{ ldap_base }}" --update
-      command: authselect select sssd
+      command: authselect --force select sssd
 
     - name: "Update ldap.conf file"
       template: src=ldap.conf.j2 dest=/etc/openldap/ldap.conf
