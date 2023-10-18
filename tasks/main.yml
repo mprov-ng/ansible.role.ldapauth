@@ -31,6 +31,21 @@
         owner=root
         group=root
         mode=0600
+    
+    - name: "Fix dir perms on /var/lib/sss/ directories"
+      file:
+        path: "/var/lib/sss/{{item.path}}"
+        state: directory
+        owner: sssd
+        group: sssd
+        recursive: false
+      with_items:
+        - db
+        - gpo_cache
+        - keytabs
+        - mc
+        - pipes
+        - pubconf
 
     - name: restart sssd
       service: 
