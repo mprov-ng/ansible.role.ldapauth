@@ -38,7 +38,7 @@
         state: directory
         owner: sssd
         group: sssd
-        recursive: false
+        recurse: false
       with_items:
         - db
         - gpo_cache
