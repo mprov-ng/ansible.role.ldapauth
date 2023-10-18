@@ -34,7 +34,7 @@
     
     - name: "Fix dir perms on /var/lib/sss/ directories"
       file:
-        path: "/var/lib/sss/{{item.path}}"
+        path: "/var/lib/sss/{{item}}"
         state: directory
         owner: sssd
         group: sssd
