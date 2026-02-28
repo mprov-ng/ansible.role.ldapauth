@@ -8,3 +8,14 @@ ldap_uri: "ldaps://ldap/"
 # ldap_tls: set to "--enableldaptls" to enable tls communications
 # comment out to disable.
 ldap_tls: "--enableldaptls"
+
+# schema to use for ldap queries
+ldap_schema: "rfc2307"
+
+# group member field name, depeneds on schema above.
+ldap_group_member: "memberUid"
+
+#entries for cache timeouts.  Defaults are pretty low compared to the defaults from the ssd package.
+entry_cache_timeout: 60
+entry_cache_user_timeout: 60
+entry_cache_group_timeout: 60

@@ -11,12 +11,12 @@ chpass_provider = ldap
 ldap_uri = {{ ldap_uri }}
 ldap_id_use_start_tls = False
 ldap_tls_cacertdir = /etc/openldap/cacerts
-ldap_schema = rfc2307
-ldap_group_member = memberUid
+ldap_schema = {{ ldap_schema }}
+ldap_group_member = {{ ldap_group_member }}
 # 2/18/26 - Protzman adding due to group issues. testing 60s, may need to bump higher.
-entry_cache_timeout = 60
-entry_cache_user_timeout = 60
-entry_cache_group_timeout = 60
+entry_cache_timeout = {{ entry_cache_timeout }}
+entry_cache_user_timeout = {{ entry_cache_user_timeout }}
+entry_cache_group_timeout = {{ entry_cache_group_timeout }}
 
 
 [sssd]
